@@ -1,6 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "skipLibCheck": true, //skip checking type declaration files (.d.ts)
+    "baseUrl": ".",
+    "paths": {
+      "~*": ["./src/*"],
+      "assets/*": ["./assets/*"]
+    }
   }
 }
