@@ -1,10 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, useColorScheme, View, StatusBar } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useMemo } from 'react';
-import { Provider as PaperProvider} from 'react-native-paper';
+import { Provider as PaperProvider, useTheme} from 'react-native-paper';
 import { useFonts } from 'expo-font';
-import { AppDefaultTheme, AppDarkTheme } from '~config/theme'
+import { AppDefaultTheme, AppDarkTheme } from '~config/theme';
+import { NavigationContainer } from '@react-navigation/native';
+import Screens from '~screens';
+import { SafeAreaProvider} from 'react-native-safe-area-context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,14 +34,20 @@ export default function App() {
     const scheme = useColorScheme();
     const theme = useMemo(() => {
       return scheme === 'light' ? AppDefaultTheme: AppDarkTheme;
-    },[scheme])
+    }, [scheme])
+    const {colors, dark} = useTheme()
 
     return (
       <PaperProvider theme={theme}>
-        <View style={styles.container} onLayout={onLayoutRootView}>
-          <Text style={{fontFamily: 'GeneralSans-Regular'}}>Open up App.tsx to start working on your app!</Text>
-          <StatusBar style="auto" />
-        </View>
+        <SafeAreaProvider>
+          <NavigationContainer theme={theme} onReady={onLayoutRootView}>
+            <StatusBar
+              backgroundColor={colors.background}
+              barStyle={dark ? 'light-content' : 'dark-content'}
+            />
+            <Screens />
+          </NavigationContainer>
+        </SafeAreaProvider>
       </PaperProvider>
     )
   }
@@ -48,12 +56,3 @@ export default function App() {
     <ThemedApp />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
