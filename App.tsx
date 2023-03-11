@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, useColorScheme, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { useCallback, useMemo } from 'react';
+import { Provider as PaperProvider} from 'react-native-paper';
 import { useFonts } from 'expo-font';
+import { AppDefaultTheme, AppDarkTheme } from '~config/theme'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,13 +28,24 @@ export default function App() {
     return null;
   }
 
+  function ThemedApp() {
+    const scheme = useColorScheme();
+    const theme = useMemo(() => {
+      return scheme === 'light' ? AppDefaultTheme: AppDarkTheme;
+    },[scheme])
+
+    return (
+      <PaperProvider theme={theme}>
+        <View style={styles.container} onLayout={onLayoutRootView}>
+          <Text style={{fontFamily: 'GeneralSans-Regular'}}>Open up App.tsx to start working on your app!</Text>
+          <StatusBar style="auto" />
+        </View>
+      </PaperProvider>
+    )
+  }
+
   return (
-    <PaperProvider>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text style={{fontFamily: 'GeneralSans-Regular'}}>Open up App.tsx to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
-    </PaperProvider>
+    <ThemedApp />
   );
 }
 
