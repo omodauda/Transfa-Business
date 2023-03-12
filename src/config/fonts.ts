@@ -98,9 +98,9 @@ const fontConfig: MD3Typescale = {
     lineHeight: 18,
   },
   bodyMedium: {
-    fontFamily: 'GeneralSans-Semibold',
+    fontFamily: 'GeneralSans-Regular',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '400',
     letterSpacing: 0,
     lineHeight: 21,
   },
