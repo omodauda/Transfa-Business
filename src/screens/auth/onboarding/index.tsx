@@ -7,7 +7,7 @@ import OnboardSvg from '~components/svg/onboard'
 import { Text, useTheme } from 'react-native-paper'
 import Button from '~components/Button'
 
-const Onboarding = ({ }: RootStackScreenProps<'Onboarding'>) => {
+const Onboarding = ({navigation}: RootStackScreenProps<'Onboarding'>) => {
   const {colors } = useTheme();
   return (
     <View style={styles.screen}>
@@ -34,7 +34,8 @@ const Onboarding = ({ }: RootStackScreenProps<'Onboarding'>) => {
         <Button
           label='Log In'
           style={styles.loginButton}
-          labelStyle={{color: colors.primary}}
+          labelStyle={{ color: colors.primary }}
+          onPress={() => navigation.navigate('Login')}
         />
       </LinearGradient>
     </View>
