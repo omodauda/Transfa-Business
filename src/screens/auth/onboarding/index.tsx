@@ -2,9 +2,13 @@ import { View } from 'react-native'
 import React from 'react'
 import { RootStackScreenProps } from '~types/navigation'
 import styles from './styles'
-import {LinearGradient} from 'expo-linear-gradient'
+import { LinearGradient } from 'expo-linear-gradient'
+import OnboardSvg from '~components/svg/onboard'
+import { Text, useTheme } from 'react-native-paper'
+import Button from '~components/Button'
 
-const Onboarding = ({}: RootStackScreenProps<'Onboarding'>) => {
+const Onboarding = ({ }: RootStackScreenProps<'Onboarding'>) => {
+  const {colors } = useTheme();
   return (
     <View style={styles.screen}>
       <LinearGradient
@@ -14,6 +18,24 @@ const Onboarding = ({}: RootStackScreenProps<'Onboarding'>) => {
         end={{ x: 1, y: 1 }}
         locations={[0, 0.6, 1]}
       >
+        <OnboardSvg />
+        <Text variant='titleLarge' style={[styles.title, { color: colors.primary }]}>
+          Send anything fast
+        </Text>
+        <Text variant='bodyMedium'
+          style={[styles.subTitle, { color: colors.onBackground, textAlign: 'center' }]}
+        >
+          Door-to-door integrated logistic service solutions for all
+          kind of delivery
+        </Text>
+        <Button
+          label='Create an Account'
+        />
+        <Button
+          label='Log In'
+          style={styles.loginButton}
+          labelStyle={{color: colors.primary}}
+        />
       </LinearGradient>
     </View>
   )
