@@ -1,7 +1,7 @@
 import { adaptNavigationTheme, configureFonts, MD3DarkTheme, MD3LightTheme } from 'react-native-paper';
+import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
 import { lightColors, darkColors } from './colors';
 import fontConfig from './fonts';
-import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
 
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,

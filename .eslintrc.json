@@ -21,7 +21,8 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "settings": {
     "import/parsers": {

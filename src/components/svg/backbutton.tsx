@@ -2,7 +2,8 @@ import * as React from "react"
 import Svg, { G, Circle, Path, Defs, SvgProps } from "react-native-svg"
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
-const BackButtonSvg = (props: SvgProps) => (
+function BackButtonSvg(props: SvgProps) {
+  return (
   <Svg
     width={48}
     height={48}
@@ -21,8 +22,9 @@ const BackButtonSvg = (props: SvgProps) => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <Defs></Defs>
+    <Defs />
   </Svg>
 )
+}
 
 export default BackButtonSvg

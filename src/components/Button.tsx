@@ -1,13 +1,14 @@
-import { StyleSheet, View, TouchableOpacity, ColorValue, StyleProp } from 'react-native'
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import { StyleSheet, View, TouchableOpacity, StyleProp } from 'react-native'
 import React from 'react'
-import Spinner from './Spinner'
 import { useTheme, Text } from 'react-native-paper';
+import Spinner from './Spinner'
 
-type labelStyleProps = {
+type LabelStyleProps = {
   color?: string;
 }
 
-type disabledStyleProps = {
+type DisabledStyleProps = {
   backgroundColor: string;
   opacity: number;
 }
@@ -25,12 +26,12 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   label: string;
-  labelStyle?: StyleProp<labelStyleProps>;
+  labelStyle?: StyleProp<LabelStyleProps>;
   style?: StyleProp<ButtonStyleProps>;
   spinnerColor?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({
+function Button({
   onPress,
   disabled,
   loading,
@@ -38,13 +39,13 @@ const Button: React.FC<ButtonProps> = ({
   labelStyle,
   style,
   spinnerColor
-}) => {
+}: ButtonProps) {
   const { colors } = useTheme()
-  const disabledStyle: disabledStyleProps = {
+  const disabledStyle: DisabledStyleProps = {
     backgroundColor: colors.surfaceDisabled,
     opacity: 0.8,
   }
-  const buttonDisabled = disabled || loading ? true : false;
+  const buttonDisabled = !!(disabled || loading);
   const buttonDisabledStyle = disabled || loading ? disabledStyle : null;
   
   const renderSpinnerOrText = () => {

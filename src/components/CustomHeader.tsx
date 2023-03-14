@@ -1,17 +1,23 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import { StyleProp, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { ReactNode } from 'react'
-import {Text, useTheme} from 'react-native-paper'
+import { Text, useTheme } from 'react-native-paper'
+
+type HeaderStyleProps = {
+  marginBottom?: number
+}
 
 interface Props {
   icon: ReactNode;
   onIconPress: () => void;
   title?: string;
+  style?: StyleProp<HeaderStyleProps>
 }
 
-const CustomHeader: React.FC<Props> = ({ icon, title, onIconPress }) => {
+function CustomHeader ({ icon, title, onIconPress, style }: Props) {
   const {colors} = useTheme()
   return (
-    <View style={[styles.header, {backgroundColor: colors.background}]}>
+    <View style={[styles.header, {backgroundColor: colors.background}, style]}>
       <TouchableOpacity
         onPress={onIconPress}
         activeOpacity={0.8}

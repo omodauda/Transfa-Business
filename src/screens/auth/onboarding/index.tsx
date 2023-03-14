@@ -1,13 +1,13 @@
 import { View } from 'react-native'
 import React from 'react'
 import { RootStackScreenProps } from '~types/navigation'
-import styles from './styles'
 import { LinearGradient } from 'expo-linear-gradient'
 import OnboardSvg from '~components/svg/onboard'
 import { Text, useTheme } from 'react-native-paper'
 import Button from '~components/Button'
+import styles from './styles'
 
-const Onboarding = ({navigation}: RootStackScreenProps<'Onboarding'>) => {
+function Onboarding ({navigation}: RootStackScreenProps<'Onboarding'>) {
   const {colors } = useTheme();
   return (
     <View style={styles.screen}>

@@ -14,7 +14,14 @@ interface Props {
   style: StyleProp<SafeAreaScreenStyleProps>;
 }
 
-const SafeAreaScreen: React.FC<Props> = ({children, style}) => {
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    paddingHorizontal: 24
+  }
+})
+
+function SafeAreaScreen({children, style}: Props) {
   const {top, bottom} = useSafeAreaInsets();
   return (
     <View style={[styles.screen, {paddingTop: top, paddingBottom: bottom}, style]}>
@@ -22,12 +29,5 @@ const SafeAreaScreen: React.FC<Props> = ({children, style}) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    paddingHorizontal: 24
-  }
-})
 
 export default SafeAreaScreen
