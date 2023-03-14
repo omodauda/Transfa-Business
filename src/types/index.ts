@@ -3,3 +3,8 @@ export type JustifyContent =
 
 export type AlignItems =
   'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch'
+
+export type LoginInput = {
+  email: string;
+  password: string
+}
