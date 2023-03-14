@@ -10,7 +10,16 @@ const styles = StyleSheet.create({
   },
   centeredText: {
     textAlign: 'center'
-  }
+  },
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'center',
+  },
+  terms: {
+    textAlign: 'center',
+    marginTop: 24,
+  },
 })
 
 export default styles;
