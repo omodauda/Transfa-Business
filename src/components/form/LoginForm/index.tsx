@@ -8,7 +8,7 @@ import {TouchableWithoutFeedback } from 'react-native';
 import {Text, useTheme} from 'react-native-paper'
 
 interface Props {
-  formData: (data: LoginInput) => void;
+  submitForm: (data: LoginInput) => void;
 }
 
 const schema = yup
@@ -23,7 +23,7 @@ const schema = yup
       .required()
   })
 
-export default function LoginForm({ formData }: Props) {
+export default function LoginForm({ submitForm }: Props) {
   const {colors} = useTheme()
   return (
     <Formik
@@ -32,7 +32,7 @@ export default function LoginForm({ formData }: Props) {
         password: ''
       }}
       validationSchema={schema}
-      onSubmit={values => formData(values)}
+      onSubmit={values => submitForm(values)}
     >
       {({touched, handleChange, handleBlur, errors, values, handleSubmit, isValid}) => (
         <>
