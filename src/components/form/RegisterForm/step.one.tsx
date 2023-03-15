@@ -5,15 +5,11 @@ import * as yup from 'yup'
 import Button from '~components/Button';
 import { RegistrationFormData } from '~types';
 import {useNavigation} from '@react-navigation/native'
+import { RootStackScreenProps } from '~types/navigation';
 
 interface Props {
   formValues: RegistrationFormData;
   setFormValues: (v: SetStateAction<RegistrationFormData>) => void;
-  // formData: (data: LoginInput) => void;
-}
-
-type UseNavigation = {
-  navigate: (args0: string, args1: {step: number}) => void
 }
 
 const schema = yup
@@ -34,7 +30,7 @@ const schema = yup
 
 export default function StepOne({ formValues, setFormValues }: Props) {
   const { businessName, emailAddress, password } = formValues;
-  const navigation = useNavigation<UseNavigation>()
+  const navigation = useNavigation<RootStackScreenProps<'SignUp'>['navigation']>()
 
   const submit = (data: RegistrationFormData) => {
     setFormValues(prevState => ({
