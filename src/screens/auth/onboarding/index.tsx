@@ -30,6 +30,7 @@ function Onboarding ({navigation}: RootStackScreenProps<'Onboarding'>) {
         </Text>
         <Button
           label='Create an Account'
+          onPress={() => navigation.navigate('SignUp', {step: 1})}
         />
         <Button
           label='Log In'
