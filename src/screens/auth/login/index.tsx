@@ -13,7 +13,7 @@ import styles from './styles'
 function Login({navigation}: RootStackScreenProps<'Login'>) {
   const { colors } = useTheme()
   
-  const formData = ({email, password}: LoginInput) => {
+  const submitForm = ({email, password}: LoginInput) => {
     console.log({email, password})
   }
   return (
@@ -37,7 +37,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
               <Text variant='bodyMedium' style={[styles.centeredText, {color: colors.onSecondaryContainer}]}>Fill in your credentials below and login to your account</Text>
             </View>
           </View>
-          <LoginForm formData={formData} />
+          <LoginForm submitForm={submitForm} />
         </ScrollView>
         <View style={styles.footer}>
           <Text
@@ -45,7 +45,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
             style={[styles.terms, {color: colors.onBackground}]}>
             Don&apos;t have an account?{' '}
           </Text>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp', {step: 1})}>
             <Text variant='bodyMedium' style={{color: colors.primary}}>
               Create an Account
             </Text>
