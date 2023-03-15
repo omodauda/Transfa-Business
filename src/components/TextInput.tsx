@@ -10,6 +10,7 @@ interface Props extends TextInputProps {
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   error?: boolean;
   errorMessage?: string;
+  edit?: boolean;
   // onEditPress?: () => void;
 }
 
@@ -24,7 +25,7 @@ function CustomTextInput ({
   placeholder,
   onChangeText,
   value,
-  editable,
+  edit,
   keyboardType,
   autoCapitalize,
   autoComplete,
@@ -54,13 +55,13 @@ function CustomTextInput ({
       }
       {
         password && (
-          <View style={[styles.inputContainer, {borderColor: error ? colors.error : borderColor}]}>
+          <View style={[styles.inputContainer, {borderColor: error ? colors.error : borderColor, backgroundColor: colors.secondary}]}>
             <TextInput
               onFocus={() => setBorderColor(colors.primary)}
               accessibilityLabel={label}
               onBlur={error ? onBlur : handleOnBlur}
               secureTextEntry={passwordHidden}
-              style={[styles.input, {color: colors.onBackground}]}
+              style={[styles.input]}
               cursorColor={colors.primary}
               autoCapitalize='none'
               onChangeText={onChangeText}
@@ -73,13 +74,13 @@ function CustomTextInput ({
         )
       }
       {
-        !password && !editable && (
-          <View style={[styles.inputContainer, {borderColor: error ? colors.error : borderColor}]}>
+        !password && !edit && (
+          <View style={[styles.inputContainer, {borderColor: error ? colors.error : borderColor, backgroundColor: colors.secondary}]}>
             <TextInput
               onFocus={() => setBorderColor(colors.primary)}
               accessibilityLabel={label}
               onBlur={error ? onBlur : handleOnBlur}
-              style={[styles.input, {color: colors.onBackground}]}
+              style={[styles.input]}
               cursorColor={colors.primary}
               autoCapitalize={autoCapitalize}
               onChangeText={onChangeText}
