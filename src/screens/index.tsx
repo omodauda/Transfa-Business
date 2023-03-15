@@ -1,26 +1,22 @@
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Text} from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { RootStackParamList } from '~types/navigation';
 
-const Stack = createNativeStackNavigator();
+// screens
+import Onboarding from './auth/onboarding';
+import Login from './auth/login';
+import Signup from './auth/signup';
 
-function Demo() {
-  const inset = useSafeAreaInsets()
-  return (
-    <View
-      style={{ flex: 1, justifyContent: 'space-between', alignItems: 'center', paddingTop: inset.top, paddingBottom: inset.bottom }}
-    >
-      <Text>This is top text.</Text>
-
-      <Text>This is bottom text.</Text>
-    </View>
-  );
-}
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Screens() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name='Demo' component={Demo} />
+      <Stack.Group>
+        <Stack.Screen name='Onboarding' component={Onboarding} />
+        <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen name='SignUp' component={Signup} />
+      </Stack.Group>
     </Stack.Navigator>
   )
 }
