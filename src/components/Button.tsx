@@ -9,7 +9,6 @@ type LabelStyleProps = {
 }
 
 type DisabledStyleProps = {
-  backgroundColor: string;
   opacity: number;
 }
 
@@ -42,8 +41,7 @@ function Button({
 }: ButtonProps) {
   const { colors } = useTheme()
   const disabledStyle: DisabledStyleProps = {
-    backgroundColor: colors.surfaceDisabled,
-    opacity: 0.8,
+    opacity: 0.7,
   }
   const buttonDisabled = !!(disabled || loading);
   const buttonDisabledStyle = disabled || loading ? disabledStyle : null;
