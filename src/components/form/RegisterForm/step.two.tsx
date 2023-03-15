@@ -13,11 +13,15 @@ interface Props {
 const schema = yup
   .object({
     registrationNo: yup
-      .string()
-      .required(),
+      .number()
+      .positive()
+      .integer()
+      .min(14, ({min}) => `cac registration number must be ${min} digits`)
+      .max(14, ({max}) => `cac registration number cannot be more than ${max} digits`)
+      .required('cac registration number is a required field'),
     businessAddress: yup
       .string()
-      .min(5, ({min}) => `business name must be at least ${min} characters`)
+      .min(5, ({min}) => `business address must be at least ${min} characters`)
       .required('business name is a required field'),
   })
 
@@ -50,6 +54,7 @@ export default function StepTwo({ formValues, setFormValues }: Props) {
             onBlur={handleBlur('registrationNo')}
             errorMessage={errors.registrationNo}
             autoCapitalize='none'
+            keyboardType='number-pad'
           />
           <CustomTextInput
             error={!!(touched.businessAddress && errors.businessAddress)}
