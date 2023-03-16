@@ -17,7 +17,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
     console.log({email, password})
   }
   return (
-    <SafeAreaScreen style={{backgroundColor: colors.background}}>
+    <SafeAreaScreen>
       <CustomHeader
         style={{ marginBottom: 27 }}
         icon={<BackButtonSvg />}
