@@ -38,8 +38,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
             </View>
           </View>
           <LoginForm submitForm={submitForm} />
-        </ScrollView>
-        <View style={styles.footer}>
+          <View style={styles.footer}>
           <Text
             variant='bodyMedium'
             style={[styles.terms, {color: colors.onBackground}]}>
@@ -51,6 +50,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
             </Text>
           </TouchableWithoutFeedback>
         </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaScreen>
   )
