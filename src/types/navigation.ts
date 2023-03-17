@@ -14,7 +14,15 @@ export type RootStackParamList = {
     prevScreen?: 'changeEmail' | 'changePhone';
     nextScreen: 'ResetPassword' | 'Profile';
   };
-  ResetPassword: undefined;
+  ResetPassword: {
+    data: {
+      type: 'email' | 'phone';
+      value: {
+        otp: string;
+        data: string
+      }
+    }
+  };
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
