@@ -16,3 +16,7 @@ export type RegistrationFormData = {
   registrationNo?: string;
   businessAddress?: string;
 }
+
+export type ResetPasswordInput = {
+  password: string
+}
