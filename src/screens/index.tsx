@@ -7,6 +7,7 @@ import Onboarding from './auth/onboarding';
 import Login from './auth/login';
 import Signup from './auth/signup';
 import ForgotPassword from './auth/forgotPassword';
+import Verification from './auth/verification';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -18,6 +19,7 @@ export default function Screens() {
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='SignUp' component={Signup} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
+        <Stack.Screen name='Verification' component={Verification} />
       </Stack.Group>
     </Stack.Navigator>
   )
