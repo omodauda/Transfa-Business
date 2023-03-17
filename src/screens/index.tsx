@@ -8,6 +8,7 @@ import Login from './auth/login';
 import Signup from './auth/signup';
 import ForgotPassword from './auth/forgotPassword';
 import Verification from './auth/verification';
+import ResetPassword from './auth/resetPassword';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -20,6 +21,7 @@ export default function Screens() {
         <Stack.Screen name='SignUp' component={Signup} />
         <Stack.Screen name='ForgotPassword' component={ForgotPassword} />
         <Stack.Screen name='Verification' component={Verification} />
+        <Stack.Screen name='ResetPassword' component={ResetPassword} />
       </Stack.Group>
     </Stack.Navigator>
   )
