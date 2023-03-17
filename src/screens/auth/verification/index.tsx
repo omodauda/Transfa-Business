@@ -47,12 +47,12 @@ export default function Verification({
 
   const handleVerify = () => {
     if (nextScreen === 'ResetPassword') {
-      // navigation.navigate(nextScreen, {
-      //   extended: {
-      //     type: extended!.type,
-      //     data: {otp: value, data: extended!.data},
-      //   },
-      // });
+      navigation.navigate(nextScreen, {
+        data: {
+          type: data.type,
+          value: {otp: value, data: data.value},
+        },
+      });
     } else if (nextScreen === 'Profile') {
       // if (prevScreen === 'ChangePhone') {
       //   const newPhone = intlFormat(extended!.data);
