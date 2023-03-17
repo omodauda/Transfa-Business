@@ -34,12 +34,32 @@ export default function ForgotPassword ({navigation}: RootStackScreenProps<'Forg
       setIdentityError('Phone or Email is required');
     }
     if (isEmail) {
-      console.log(normalizedIdentity)
+      // console.log(normalizedIdentity)
+      navigation.navigate(
+        'Verification',
+        {
+          medium: 'email address',
+          data: {
+            type: 'email',
+            value: normalizedIdentity,
+          },
+          nextScreen: 'ResetPassword'
+        })
     } else {
       const isPhone = schema.isValidSync({phone: normalizedIdentity});
       if (isPhone) {
         const phone = IntlFormat(normalizedIdentity);
-       console.log(phone)
+      //  console.log(phone)
+        navigation.navigate(
+        'Verification',
+        {
+          medium: 'phone number',
+          data: {
+            type: 'phone',
+            value: phone,
+          },
+          nextScreen: 'ResetPassword'
+        })
       }
     }
   };
