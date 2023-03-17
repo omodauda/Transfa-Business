@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import {StyleSheet, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
 import React, { useState } from 'react';
 import Button from '~components/Button';
 import * as yup from 'yup';
@@ -71,36 +71,40 @@ export default function ForgotPassword ({navigation}: RootStackScreenProps<'Forg
         icon={<BackButtonSvg />}
         onIconPress={() => navigation.goBack()}
       />
-      <View style={styles.logoView}>
-        <ForgotPasswordSvg />
-      </View>
-      <View style={styles.textWrapper}>
-        <Text
-          variant='headlineMedium'
-          style={[styles.title, {color: colors.onBackground}]}>
-          Forgot Password
-        </Text>
-        <Text
-          variant='bodyMedium'
-          style={[styles.desc, {color: colors.onSecondary}]}>
-          Enter the phone number or email address registered to your account to
-          reset your password
-        </Text>
-      </View>
-      <PhoneEmailInput
-        identity={identity}
-        setIdentity={setIdentity}
-        isValidIdentity={isValidIdentity}
-        setIsValidIdentity={setIsValidIdentity}
-        identityError={identityError}
-        setIdentityError={setIdentityError}
-      />
-      <Button
-        disabled={identityError?.length !== 0}
-        onPress={() => handleSubmit()}
-        label="Reset Password"
-        style={styles.button}
-      />
+      <KeyboardAvoidingView behavior='height'>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.logoView}>
+            <ForgotPasswordSvg />
+          </View>
+          <View style={styles.textWrapper}>
+            <Text
+              variant='headlineMedium'
+              style={[styles.title, {color: colors.onBackground}]}>
+              Forgot Password
+            </Text>
+            <Text
+              variant='bodyMedium'
+              style={[styles.desc, {color: colors.onSecondary}]}>
+              Enter the phone number or email address registered to your account to
+              reset your password
+            </Text>
+          </View>
+          <PhoneEmailInput
+            identity={identity}
+            setIdentity={setIdentity}
+            isValidIdentity={isValidIdentity}
+            setIsValidIdentity={setIsValidIdentity}
+            identityError={identityError}
+            setIdentityError={setIdentityError}
+          />
+          <Button
+            disabled={identityError?.length !== 0}
+            onPress={() => handleSubmit()}
+            label="Reset Password"
+            style={styles.button}
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaScreen>
   );
 };
