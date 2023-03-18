@@ -7,14 +7,19 @@ type HeaderStyleProps = {
   marginBottom?: number
 }
 
+type LabelStyleProps = {
+  color: string
+}
+
 interface Props {
   icon: ReactNode;
   onIconPress: () => void;
   title?: string;
-  style?: StyleProp<HeaderStyleProps>
+  style?: StyleProp<HeaderStyleProps>;
+  labelStyle?: StyleProp<LabelStyleProps>;
 }
 
-function CustomHeader ({ icon, title, onIconPress, style }: Props) {
+function CustomHeader ({ icon, title, onIconPress, style, labelStyle }: Props) {
   const {colors} = useTheme()
   return (
     <View style={[styles.header, {backgroundColor: colors.background}, style]}>
@@ -28,7 +33,7 @@ function CustomHeader ({ icon, title, onIconPress, style }: Props) {
       <View>
         <Text
           variant='headlineMedium'
-          style={{ color: colors.onBackground }}
+          style={[{ color: colors.onBackground }, labelStyle]}
         >
           {title}
         </Text>
