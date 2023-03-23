@@ -5,9 +5,32 @@ export type RootStackParamList = {
   SignUp: { step: number };
   Login: undefined;
   ForgotPassword: undefined;
-  Verification: undefined;
-  ResetPassword: undefined;
+  Verification: {
+    medium: 'phone number' | 'email address';
+    data: {
+      type: 'email' | 'phone';
+      value: string;
+    };
+    prevScreen?: 'changeEmail' | 'changePhone';
+    nextScreen: 'ResetPassword' | 'Profile';
+  };
+  ResetPassword: {
+    data: {
+      type: 'email' | 'phone';
+      value: {
+        otp: string;
+        data: string
+      }
+    }
+  };
+  Home: undefined;
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList { }
+  }
+}

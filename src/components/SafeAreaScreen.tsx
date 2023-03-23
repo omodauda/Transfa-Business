@@ -5,9 +5,10 @@ import { AlignItems, JustifyContent } from '~types';
 import { useTheme } from 'react-native-paper';
 
 type SafeAreaScreenStyleProps = {
-  backgroundColor: string;
+  backgroundColor?: string;
   justifyContent?: JustifyContent
   alignItems?: AlignItems;
+  paddingHorizontal?: number;
 }
 
 interface Props {

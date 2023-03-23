@@ -17,7 +17,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
     console.log({email, password})
   }
   return (
-    <SafeAreaScreen style={{backgroundColor: colors.background}}>
+    <SafeAreaScreen>
       <CustomHeader
         style={{ marginBottom: 27 }}
         icon={<BackButtonSvg />}
@@ -38,19 +38,19 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
             </View>
           </View>
           <LoginForm submitForm={submitForm} />
-        </ScrollView>
-        <View style={styles.footer}>
+          <View style={styles.footer}>
           <Text
             variant='bodyMedium'
             style={[styles.terms, {color: colors.onBackground}]}>
             Don&apos;t have an account?{' '}
           </Text>
           <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp', {step: 1})}>
-            <Text variant='bodyMedium' style={{color: colors.primary}}>
+            <Text variant="labelMedium" style={{color: colors.primary}}>
               Create an Account
             </Text>
           </TouchableWithoutFeedback>
         </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaScreen>
   )

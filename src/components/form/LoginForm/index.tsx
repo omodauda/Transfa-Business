@@ -6,6 +6,8 @@ import Button from '~components/Button';
 import { LoginInput } from '~types';
 import {TouchableWithoutFeedback } from 'react-native';
 import {Text, useTheme} from 'react-native-paper'
+import { useNavigation } from '@react-navigation/native';
+import { RootStackScreenProps } from '~types/navigation';
 
 interface Props {
   submitForm: (data: LoginInput) => void;
@@ -24,7 +26,9 @@ const schema = yup
   })
 
 export default function LoginForm({ submitForm }: Props) {
-  const {colors} = useTheme()
+  const { colors } = useTheme()
+  const navigation = useNavigation<RootStackScreenProps<'Login'>['navigation']>()
+
   return (
     <Formik
       initialValues={{
@@ -55,7 +59,7 @@ export default function LoginForm({ submitForm }: Props) {
             onBlur={handleBlur('password')}
             errorMessage={errors.password}
           />
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('ForgotPassword')}>
             <Text
               variant='bodySmall'
               style={{ color: colors.primary, textAlign: 'right', marginTop: 11 }}
