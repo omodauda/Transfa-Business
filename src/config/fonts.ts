@@ -77,11 +77,11 @@ const fontConfig: MD3Typescale = {
     lineHeight: 18,
   },
   labelMedium: {
-    fontFamily: 'GeneralSans-Regular',
+    fontFamily: 'GeneralSans-Medium',
     fontSize: 16,
-    fontWeight: '400',
+    fontWeight: '500',
     letterSpacing: 0,
-    lineHeight: 0,
+    lineHeight: 21,
   },
   labelLarge: {
     fontFamily: 'GeneralSans-Regular',
