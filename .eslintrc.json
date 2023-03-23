@@ -3,12 +3,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "airbnb",
-    "airbnb-typescript",
-    "prettier"
-  ],
+  "extends": ["plugin:react/recommended", "airbnb", "airbnb-typescript", "prettier"],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
