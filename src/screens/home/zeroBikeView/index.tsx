@@ -10,7 +10,7 @@ import Button from '~components/Button'
 export default function ZeroBikeView() {
   const {colors} = useTheme()
   return (
-    <View>
+    <View style={styles.screen}>
       <CustomHeader
         title='Transfa'
         icon={<SettingSvg />}
@@ -23,7 +23,7 @@ export default function ZeroBikeView() {
       >
         Welcome,
         <Text
-          variant='bodyMedium'
+          variant="labelMedium"
           style={{color: colors.primary}}
         > Admin</Text>
       </Text>
@@ -52,6 +52,10 @@ export default function ZeroBikeView() {
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    paddingHorizontal: 24
+  },
   welcomeText: {
     marginTop: 22,
     marginBottom: 44
