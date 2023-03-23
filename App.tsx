@@ -1,12 +1,14 @@
-import { StyleSheet, Text, useColorScheme, View, StatusBar } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { useColorScheme, StatusBar } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback, useMemo } from 'react';
 import { Provider as PaperProvider, useTheme} from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import { AppDefaultTheme, AppDarkTheme } from '~config/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import Screens from '~screens';
-import { SafeAreaProvider} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ApolloProvider } from '@apollo/client';
+import client, {persistor} from '~graphql/client';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,6 +23,7 @@ export default function App() {
   })
 
   const onLayoutRootView = useCallback(async () => {
+    await persistor.restore()
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
@@ -32,9 +35,7 @@ export default function App() {
 
   function ThemedApp() {
     const scheme = useColorScheme();
-    const theme = useMemo(() => {
-      return scheme === 'light' ? AppDefaultTheme: AppDarkTheme;
-    }, [scheme])
+    const theme = useMemo(() => scheme === 'light' ? AppDefaultTheme: AppDarkTheme, [scheme])
     const {colors, dark} = useTheme()
 
     return (
@@ -53,6 +54,8 @@ export default function App() {
   }
 
   return (
-    <ThemedApp />
+    <ApolloProvider client={client}>
+      <ThemedApp />
+    </ApolloProvider>
   );
 }
