@@ -28,6 +28,7 @@ export default function PendingAccount() {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
+    paddingHorizontal: 24,
     justifyContent: 'center',
     alignItems: 'center'
   },
