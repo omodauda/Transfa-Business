@@ -45,7 +45,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
             Don&apos;t have an account?{' '}
           </Text>
           <TouchableWithoutFeedback onPress={() => navigation.navigate('SignUp', {step: 1})}>
-            <Text variant='bodyMedium' style={{color: colors.primary}}>
+            <Text variant="labelMedium" style={{color: colors.primary}}>
               Create an Account
             </Text>
           </TouchableWithoutFeedback>

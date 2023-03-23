@@ -56,7 +56,7 @@ export default function Signup({
               )
             }
           </View>
-          <Text variant='bodyMedium' style={[styles.step, { color: colors.primary, marginTop: currentStep === 1 ? 45 : 12 }]}>
+          <Text variant="labelMedium" style={[styles.step, { color: colors.primary, marginTop: currentStep === 1 ? 45 : 12 }]}>
             Step {currentStep} of {totalSteps}
           </Text>
           {
@@ -75,7 +75,7 @@ export default function Signup({
               />
                 <Text variant='bodyMedium' style={[styles.terms, {color: colors.onBackground}]}>
                   By continuing, you accept our
-                  <Text variant='bodyMedium' style={{color: colors.primary}}> Terms Conditions and Privacy Policy</Text>
+                  <Text variant="labelMedium" style={{color: colors.primary}}> Terms Conditions and Privacy Policy</Text>
                 </Text>
               </>
             )
