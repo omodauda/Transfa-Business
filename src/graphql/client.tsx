@@ -7,6 +7,7 @@ import {
 import { CachePersistor, AsyncStorageWrapper } from 'apollo3-cache-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {onError} from '@apollo/client/link/error'
+import { showMessage } from 'react-native-flash-message';
 
 
 export const cache = new InMemoryCache();
@@ -23,14 +24,11 @@ const httpLink = new HttpLink({
 const errorLink = onError(({graphQLErrors}) => {
   if (graphQLErrors) {
     graphQLErrors.forEach?.(e => {
-      console.log(e.message)
-      // showMessage({
-      //   message: 'Error',
-      //   description: e.message,
-      //   type: 'default',
-      //   backgroundColor: Colors.purple,
-      //   color: Colors.white,
-      // });
+      showMessage({
+        message: 'Error',
+        description: e.message,
+        type: 'default',
+      });
     });
   }
 });
