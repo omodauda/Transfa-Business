@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useColorScheme, StatusBar, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider as PaperProvider, useTheme} from 'react-native-paper';
@@ -23,15 +23,17 @@ export default function App() {
     'GeneralSans-Semibold': require('./assets/fonts/GeneralSans-Semibold.otf'),
     'GeneralSans-Bold': require('./assets/fonts/GeneralSans-Bold.otf'),
   })
+  const [loading, setLoading] = useState(true)
 
   const onLayoutRootView = useCallback(async () => {
     await persistor.restore()
+    setLoading(false);
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded])
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded && loading) {
     return null;
   }
 
