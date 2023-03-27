@@ -1,12 +1,16 @@
-import { StyleSheet, Text, useColorScheme, View, StatusBar } from 'react-native';
+/* eslint-disable @typescript-eslint/no-use-before-define */
+import React, { useCallback, useMemo, useState } from 'react';
+import { useColorScheme, StatusBar, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback, useMemo } from 'react';
 import { Provider as PaperProvider, useTheme} from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import { AppDefaultTheme, AppDarkTheme } from '~config/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import Screens from '~screens';
-import { SafeAreaProvider} from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ApolloProvider } from '@apollo/client';
+import client, { persistor } from '~graphql/client';
+import FlashMessage from 'react-native-flash-message';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,22 +23,23 @@ export default function App() {
     'GeneralSans-Semibold': require('./assets/fonts/GeneralSans-Semibold.otf'),
     'GeneralSans-Bold': require('./assets/fonts/GeneralSans-Bold.otf'),
   })
+  const [loading, setLoading] = useState(true)
 
   const onLayoutRootView = useCallback(async () => {
+    await persistor.restore()
+    setLoading(false);
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded])
 
-  if (!fontsLoaded) {
+  if (!fontsLoaded && loading) {
     return null;
   }
 
   function ThemedApp() {
     const scheme = useColorScheme();
-    const theme = useMemo(() => {
-      return scheme === 'light' ? AppDefaultTheme: AppDarkTheme;
-    }, [scheme])
+    const theme = useMemo(() => scheme === 'light' ? AppDefaultTheme: AppDarkTheme, [scheme])
     const {colors, dark} = useTheme()
 
     return (
@@ -46,6 +51,14 @@ export default function App() {
               barStyle={dark ? 'light-content' : 'dark-content'}
             />
             <Screens />
+            <FlashMessage
+              position="top"
+              duration={3000}
+              floating
+              style={[styles.card, {backgroundColor: colors.primary}]}
+              titleStyle={[styles.title, {color: colors.surface}]}
+              textStyle={[styles.description, {color: colors.surface}]}
+            />
           </NavigationContainer>
         </SafeAreaProvider>
       </PaperProvider>
@@ -53,6 +66,29 @@ export default function App() {
   }
 
   return (
-    <ThemedApp />
+    <ApolloProvider client={client}>
+      <ThemedApp />
+    </ApolloProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    paddingVertical: 17,
+    paddingHorizontal: 24,
+    borderRadius: 8
+  },
+   title: {
+    textAlign: 'center',
+    marginBottom: 4,
+    fontFamily: 'GeneralSans-Medium',
+    fontWeight: "500",
+    fontSize: 20
+  },
+  description: {
+    textAlign: 'center',
+    fontFamily: 'GeneralSans-Regular',
+    fontWeight: '400',
+    fontSize: 14
+  },
+})

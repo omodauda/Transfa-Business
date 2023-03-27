@@ -18,7 +18,7 @@ const schema = yup
       .string()
       .min(5, ({min}) => `business name must be at least ${min} characters`)
       .required('business name is a required field'),
-    emailAddress: yup
+    email: yup
       .string()
       .email()
       .required('email address is a required field'),
@@ -29,14 +29,14 @@ const schema = yup
   })
 
 export default function StepOne({ formValues, setFormValues }: Props) {
-  const { businessName, emailAddress, password } = formValues;
+  const { businessName, email, password } = formValues;
   const navigation = useNavigation<RootStackScreenProps<'SignUp'>['navigation']>()
 
   const submit = (data: RegistrationFormData) => {
     setFormValues(prevState => ({
       ...prevState,
       businessName: data.businessName,
-      emailAddress: data.emailAddress,
+      email: data.email,
       password: data.password
     }));
     navigation.navigate('SignUp', {step: 2})
@@ -45,7 +45,7 @@ export default function StepOne({ formValues, setFormValues }: Props) {
     <Formik
       initialValues={{
         businessName,
-        emailAddress,
+        email,
         password
       }}
       validationSchema={schema}
@@ -63,12 +63,12 @@ export default function StepOne({ formValues, setFormValues }: Props) {
             autoCapitalize='none'
           />
           <CustomTextInput
-            error={!!(touched.emailAddress && errors.emailAddress)}
+            error={!!(touched.email && errors.email)}
             label='Email address'
-            value={values.emailAddress}
-            onChangeText={handleChange('emailAddress')}
-            onBlur={handleBlur('emailAddress')}
-            errorMessage={errors.emailAddress}
+            value={values.email}
+            onChangeText={handleChange('email')}
+            onBlur={handleBlur('email')}
+            errorMessage={errors.email}
             autoComplete='email'
             autoCapitalize='none'
           />
