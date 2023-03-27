@@ -43,3 +43,7 @@ export interface Order {
   rider: Rider;
   amount: number
 }
+
+export type AuthState = {
+  accessToken: string;
+}
