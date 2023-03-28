@@ -11,6 +11,9 @@ import { RootStackScreenProps } from '~types/navigation';
 import ForgotPasswordSvg from '~components/svg/forgotpassword';
 import PhoneEmailInput from '~components/PhoneEmailInput';
 import IntlFormat from '~utils/phone';
+import useForgotPasswordPhone from '~hooks/api/useForgotPasswordPhone';
+import { showMessage } from 'react-native-flash-message';
+import useForgotPasswordEmail from '~hooks/api/useForgotPasswordEmail';
 
 export default function ForgotPassword ({navigation}: RootStackScreenProps<'ForgotPassword'>) {
   const { colors } = useTheme();
@@ -27,6 +30,47 @@ export default function ForgotPassword ({navigation}: RootStackScreenProps<'Forg
       ),
   });
 
+  const phoneSuccess = (data: string) => {
+    showMessage({
+      message: 'Password Reset',
+      description: data,
+      type: 'default',
+    });
+    setTimeout(() => {
+      navigation.navigate('Verification', {
+        medium: 'phone number',
+        data: {
+          type: 'phone',
+          value: IntlFormat(normalizedIdentity)
+        },
+        nextScreen: 'ResetPassword',
+      });
+    }, 3500);
+  };
+
+  const { forgotPasswordPhone, loading: withPhoneLoading } = useForgotPasswordPhone({ success: phoneSuccess })
+  
+  const emailSuccess = (data: string) => {
+    showMessage({
+      message: 'Password Reset',
+      description: data,
+      type: 'default',
+    });
+    setTimeout(() => {
+      navigation.navigate('Verification', {
+        medium: 'email address',
+        data: {
+          type: 'email',
+          value: normalizedIdentity
+        },
+        nextScreen: 'ResetPassword',
+      });
+    }, 3500);
+  };
+
+  const { forgotPassword: forgotPasswordEmail, withEmailLoading } =
+    useForgotPasswordEmail({ success: emailSuccess })
+
   const normalizedIdentity = identity.toLowerCase();
   const isEmail = schema.isValidSync({email: normalizedIdentity});
   const handleSubmit = () => {
@@ -34,32 +78,12 @@ export default function ForgotPassword ({navigation}: RootStackScreenProps<'Forg
       setIdentityError('Phone or Email is required');
     }
     if (isEmail) {
-      // console.log(normalizedIdentity)
-      navigation.navigate(
-        'Verification',
-        {
-          medium: 'email address',
-          data: {
-            type: 'email',
-            value: normalizedIdentity,
-          },
-          nextScreen: 'ResetPassword'
-        })
+      forgotPasswordEmail({email: normalizedIdentity})
     } else {
       const isPhone = schema.isValidSync({phone: normalizedIdentity});
       if (isPhone) {
         const phone = IntlFormat(normalizedIdentity);
-      //  console.log(phone)
-        navigation.navigate(
-        'Verification',
-        {
-          medium: 'phone number',
-          data: {
-            type: 'phone',
-            value: phone,
-          },
-          nextScreen: 'ResetPassword'
-        })
+        forgotPasswordPhone({phone})
       }
     }
   };
@@ -99,6 +123,7 @@ export default function ForgotPassword ({navigation}: RootStackScreenProps<'Forg
           />
           <Button
             disabled={identityError?.length !== 0}
+            loading={withPhoneLoading || withEmailLoading}
             onPress={() => handleSubmit()}
             label="Reset Password"
             style={styles.button}
