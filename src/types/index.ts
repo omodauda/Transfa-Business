@@ -47,3 +47,7 @@ export interface Order {
 export type AuthState = {
   accessToken: string;
 }
+
+export type MutationHookProp = {
+  success: (data: string) => void;
+}
