@@ -17,6 +17,7 @@ const documents = {
     "\n  mutation ForgotPasswordPhone($input: PhoneInput!) {\n    forgotPasswordPhone(input: $input) {\n      message\n    }\n  }\n": types.ForgotPasswordPhoneDocument,
     "\n  mutation Login($input: LoginWithEmailInput!) {\n    loginBusiness(input: $input) {\n      token\n    }\n  }\n": types.LoginDocument,
     "\n  mutation Register($input: RegisterBusinessInput!) {\n    registerBusiness (input: $input) {\n      token\n    }\n  }\n": types.RegisterDocument,
+    "\n  mutation ResetPasswordEmail($input: ResetPasswordWithEmailInput!) {\n    resetPasswordWithEmail(input: $input) {\n      message\n    }\n  }\n": types.ResetPasswordEmailDocument,
     "\n  mutation ResetPasswordWithPhone($input: ResetPasswordWithPhoneInput!) {\n    resetPasswordWithPhone(input: $input) {\n      message\n    }\n  }\n": types.ResetPasswordWithPhoneDocument,
 };
 
@@ -50,6 +51,10 @@ export function gql(source: "\n  mutation Login($input: LoginWithEmailInput!) {\
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation Register($input: RegisterBusinessInput!) {\n    registerBusiness (input: $input) {\n      token\n    }\n  }\n"): (typeof documents)["\n  mutation Register($input: RegisterBusinessInput!) {\n    registerBusiness (input: $input) {\n      token\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation ResetPasswordEmail($input: ResetPasswordWithEmailInput!) {\n    resetPasswordWithEmail(input: $input) {\n      message\n    }\n  }\n"): (typeof documents)["\n  mutation ResetPasswordEmail($input: ResetPasswordWithEmailInput!) {\n    resetPasswordWithEmail(input: $input) {\n      message\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
