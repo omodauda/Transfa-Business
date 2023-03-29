@@ -7,6 +7,7 @@ import { ResetPasswordInput } from '~types';
 
 interface Props {
   submitForm: (data: ResetPasswordInput) => void;
+  loading: boolean;
 }
 
 const schema = yup.object().shape({
@@ -20,7 +21,7 @@ const schema = yup.object().shape({
     .required('*Confirm password is a required field'),
 });
 
-export default function ResetPasswordForm({ submitForm }: Props) {
+export default function ResetPasswordForm({ submitForm, loading }: Props) {
   return (
     <Formik
       initialValues={{
@@ -52,6 +53,7 @@ export default function ResetPasswordForm({ submitForm }: Props) {
           />
           <Button
             label='Create New Password'
+            loading={loading}
             disabled={!isValid}
             onPress={handleSubmit}
             style={{marginTop: 48}}
