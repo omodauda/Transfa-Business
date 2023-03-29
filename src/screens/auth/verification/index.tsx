@@ -16,11 +16,12 @@ import Button from '~components/Button';
 import CountDownTimer from 'react-native-countdown-timer-hooks';
 import { RootStackScreenProps } from '~types/navigation';
 import { useTheme, Text } from 'react-native-paper';
-// import IntlFormat from '~utils/phone';
 import SafeAreaScreen from '~components/SafeAreaScreen';
 import VerificationSvg from '~components/svg/verification';
 import CustomHeader from '~components/CustomHeader';
 import BackButtonSvg from '~components/svg/backbutton';
+import useForgotPasswordPhone from '~hooks/api/useForgotPasswordPhone';
+import useForgotPasswordEmail from '~hooks/api/useForgotPasswordEmail';
 
 const CELL_COUNT = 4;
 
@@ -64,13 +65,17 @@ export default function Verification({
     }
   };
 
+  const emptySuccess = () => {};
+
+  const { forgotPasswordPhone } = useForgotPasswordPhone({ success: emptySuccess })
+  const {forgotPassword: forgotPasswordEmail} = useForgotPasswordEmail({success: emptySuccess})
+
   const handleResendCode = () => {
-    if (data?.type === 'phone' && prevScreen === undefined) {
-      // const phone = IntlFormat(data.value);
-      // forgotPasswordPhone({phone});
+    if (data.type === 'phone' && prevScreen === undefined) {
+      forgotPasswordPhone({phone: data.value});
     }
-    if (data?.type === 'email' && prevScreen === undefined) {
-      // forgotPasswordEmail({email: data.value});
+    if (data.type === 'email' && prevScreen === undefined) {
+      forgotPasswordEmail({email: data.value});
     }
     if (prevScreen === 'changePhone') {
       // const phone = IntlFormat(data!.value);

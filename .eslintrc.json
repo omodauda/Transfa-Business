@@ -17,7 +17,10 @@
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/require-default-props": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/no-unstable-nested-components": "off",
+    "global-require": "off"
   },
   "settings": {
     "import/parsers": {

@@ -3,15 +3,12 @@ import { Formik } from 'formik';
 import CustomTextInput from '~components/TextInput';
 import * as yup from 'yup'
 import Button from '~components/Button';
-import { LoginInput } from '~types';
 import {TouchableWithoutFeedback } from 'react-native';
 import {Text, useTheme} from 'react-native-paper'
 import { useNavigation } from '@react-navigation/native';
 import { RootStackScreenProps } from '~types/navigation';
-
-interface Props {
-  submitForm: (data: LoginInput) => void;
-}
+import { LoginWithEmailInput } from '~__generated__/graphql';
+import useLogin from '~hooks/api/useLogin';
 
 const schema = yup
   .object({
@@ -25,9 +22,14 @@ const schema = yup
       .required()
   })
 
-export default function LoginForm({ submitForm }: Props) {
+export default function LoginForm() {
   const { colors } = useTheme()
   const navigation = useNavigation<RootStackScreenProps<'Login'>['navigation']>()
+  const {login, loading} = useLogin()
+
+  function handleLogin(values: LoginWithEmailInput) {
+    login(values)
+  }
 
   return (
     <Formik
@@ -36,7 +38,7 @@ export default function LoginForm({ submitForm }: Props) {
         password: ''
       }}
       validationSchema={schema}
-      onSubmit={values => submitForm(values)}
+      onSubmit={values => handleLogin(values)}
     >
       {({touched, handleChange, handleBlur, errors, values, handleSubmit, isValid}) => (
         <>
@@ -70,6 +72,7 @@ export default function LoginForm({ submitForm }: Props) {
           <Button
             label='Log In'
             disabled={!isValid}
+            loading={loading}
             onPress={handleSubmit}
             style={{marginTop: 48}}
           />

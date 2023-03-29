@@ -7,8 +7,8 @@ import CustomHeader from '~components/CustomHeader'
 import { RootStackScreenProps } from '~types/navigation'
 import RegisterSvg from '~components/svg/register'
 import StepOne from '~components/form/RegisterForm/step.one'
-import { RegistrationFormData } from '~types'
 import StepTwo from '~components/form/RegisterForm/step.two'
+import { RegistrationFormData } from '~types'
 import styles from './styles'
 
 export default function Signup({
@@ -21,12 +21,11 @@ export default function Signup({
 
   const [registrationData, setRegistrationData] = useState<RegistrationFormData>({
     businessName: '',
-    emailAddress: '',
+    email: '',
     password: '',
     registrationNo: '',
-    businessAddress: ''
+    address: '',
   })
-  console.log('registration.data', registrationData)
 
   const goBack = () => {
     if (currentStep === 1) {
@@ -71,7 +70,6 @@ export default function Signup({
               <>
               <StepTwo
                 formValues={registrationData}
-                setFormValues={setRegistrationData}
               />
                 <Text variant='bodyMedium' style={[styles.terms, {color: colors.onBackground}]}>
                   By continuing, you accept our

@@ -13,10 +13,11 @@ export type LoginInput = {
 
 export type RegistrationFormData = {
   businessName?: string;
-  emailAddress?: string;
+  email?: string;
   password?: string;
   registrationNo?: string;
-  businessAddress?: string;
+  address?: string;
+  phone?: string;
 }
 
 export type ResetPasswordInput = {
@@ -41,4 +42,12 @@ export interface Order {
   id: string;
   rider: Rider;
   amount: number
+}
+
+export type AuthState = {
+  accessToken: string;
+}
+
+export type MutationHookProp = {
+  success: (data: string) => void;
 }

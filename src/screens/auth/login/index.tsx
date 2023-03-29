@@ -7,15 +7,11 @@ import CustomHeader from '~components/CustomHeader'
 import BackButtonSvg from '~components/svg/backbutton'
 import WelcomeSvg from '~components/svg/welcome'
 import LoginForm from '~components/form/LoginForm'
-import { LoginInput } from '~types'
 import styles from './styles'
 
 function Login({navigation}: RootStackScreenProps<'Login'>) {
   const { colors } = useTheme()
   
-  const submitForm = ({email, password}: LoginInput) => {
-    console.log({email, password})
-  }
   return (
     <SafeAreaScreen>
       <CustomHeader
@@ -37,7 +33,7 @@ function Login({navigation}: RootStackScreenProps<'Login'>) {
               <Text variant='bodyMedium' style={[styles.centeredText, {color: colors.onSecondaryContainer}]}>Fill in your credentials below and login to your account</Text>
             </View>
           </View>
-          <LoginForm submitForm={submitForm} />
+          <LoginForm />
           <View style={styles.footer}>
           <Text
             variant='bodyMedium'
