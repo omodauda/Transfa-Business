@@ -2,6 +2,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
+import NetworkError from '~components/networkError';
 import SafeAreaScreen from '~components/SafeAreaScreen'
 import useGetBusiness from '~hooks/api/useGetBusiness'
 import { BusinessReviewStatus } from '~__generated__/graphql';
@@ -10,7 +11,7 @@ import PendingAccount from './pendingAccountView'
 import ZeroBikeView from './zeroBikeView';
 
 export default function Home() {
-  const { loading, data } = useGetBusiness();
+  const { loading, data, error, refetch } = useGetBusiness();
 
   function Loader() {
     return (
@@ -18,6 +19,10 @@ export default function Home() {
         <ActivityIndicator size='large' />
       </View>
     )
+  }
+
+  if (error?.networkError?.message === 'Network request failed') {
+    return <NetworkError retry={refetch} />;
   }
 
   // eslint-disable-next-line consistent-return
