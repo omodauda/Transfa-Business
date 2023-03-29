@@ -3,7 +3,6 @@ import {KeyboardAvoidingView, ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import { RootStackScreenProps } from '~types/navigation';
 import { useTheme, Text } from 'react-native-paper';
-// import IntlFormat from '~utils/phone';
 import SafeAreaScreen from '~components/SafeAreaScreen';
 import VerificationSvg from '~components/svg/verification';
 import ResetPasswordForm from '~components/form/ResetPassword';
@@ -12,6 +11,7 @@ import CustomHeader from '~components/CustomHeader';
 import BackButtonSvg from '~components/svg/backbutton';
 import useResetPasswordPhone from '~hooks/api/useResetPasswordPhone';
 import { showMessage } from 'react-native-flash-message';
+import useResetPasswordEmail from '~hooks/api/useResetPasswordEmail';
 
 export default function ResetPassword ({
   navigation,
@@ -25,7 +25,7 @@ export default function ResetPassword ({
     if (type === 'phone') {
       resetPasswordPhone({phone: data, otp, newPassword: password});
     } else if (type === 'email') {
-      // resetPasswordEmail({email: data, otp, newPassword});
+      resetPasswordEmail({email: data, otp, newPassword: password});
     }
   }
 
@@ -46,8 +46,8 @@ export default function ResetPassword ({
   const {resetPassword: resetPasswordPhone, loading: withPhoneLoading} =
     useResetPasswordPhone({success});
 
-  // const {resetPassword: resetPasswordEmail, loading: withEmailLoading} =
-  //   useResetPasswordEmail({success});
+  const {resetPassword: resetPasswordEmail, loading: withEmailLoading} =
+    useResetPasswordEmail({success});
 
   return (
     <SafeAreaScreen>
@@ -77,7 +77,7 @@ export default function ResetPassword ({
           </View>
           <ResetPasswordForm
             submitForm={submitForm}
-            loading={withPhoneLoading}
+            loading={withPhoneLoading || withEmailLoading}
           />
         </ScrollView>
       </KeyboardAvoidingView>
