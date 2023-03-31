@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1000260722803",
+    "project_id": "transfa-eb82e",
+    "storage_bucket": "transfa-eb82e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000260722803:android:f9217770dffa5c5ce18a06",
+        "android_client_info": {
+          "package_name": "com.transfa.business"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000260722803-30smfrau104saf776r2h2ncvu1n4j7pr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmAMeKU6fRCz6cBVIwjb8cumRyQPd2MKY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000260722803-30smfrau104saf776r2h2ncvu1n4j7pr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1000260722803-sctskqnhvggtvkdq7vl5nhi7dhh9gd5l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.transfa"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

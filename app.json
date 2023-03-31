@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "transfa-business",
+    "name": "Transfa Business",
     "slug": "transfa-business",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,16 +13,25 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.transfa.business"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.transfa.business",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8bde03c0-c513-4b62-9b53-cb8bf5af8ea7"
+      }
+    },
+    "plugins": ["@react-native-firebase/app", "@notifee/react-native"]
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useColorScheme, StatusBar, StyleSheet } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { Provider as PaperProvider, useTheme} from 'react-native-paper';
@@ -11,8 +11,42 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ApolloProvider } from '@apollo/client';
 import client, { persistor } from '~graphql/client';
 import FlashMessage from 'react-native-flash-message';
+import notifee, { AuthorizationStatus } from '@notifee/react-native';
+import messaging, {FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 
 SplashScreen.preventAutoHideAsync();
+
+const createChannels = async () => {
+  const channel = await notifee.createChannel({
+    id: 'default',
+    vibration: true,
+    name: 'Default Channel'
+  })
+  return channel
+}
+
+async function requestUserPermission() {
+  const settings = await notifee.requestPermission();
+  if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
+    await createChannels()
+  }
+}
+
+const onMessageHandler = (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
+  const { notification, data } = remoteMessage;
+  notifee.displayNotification({
+    title: `<p style="color: #212121; font-size: 15px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">${notification?.title}</p>`,
+    body: `<p style="color: #212121; font-size: 13px; font-weight: 400; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">${notification?.body}</p>`,
+    android: {
+      largeIcon:
+        'https://res.cloudinary.com/omodauda/image/upload/v1674060463/App_icon_ghpctd.png',
+      channelId: 'default',
+    },
+    data,
+  });
+}
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,6 +66,14 @@ export default function App() {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded])
+
+  useEffect(() => {
+    requestUserPermission();
+    const messageSubscription = messaging().onMessage(onMessageHandler);
+    return () => {
+      messageSubscription();
+    }
+  }, [])
 
   if (!fontsLoaded && loading) {
     return null;
