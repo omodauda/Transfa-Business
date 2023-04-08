@@ -3,6 +3,7 @@ import { gql } from "~__generated__";
 export default gql(`
   query GetBusiness {
     getBusiness {
+      id
       status
       registrationNo
       phone
