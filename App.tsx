@@ -12,7 +12,8 @@ import { ApolloProvider } from '@apollo/client';
 import client, { persistor } from '~graphql/client';
 import FlashMessage from 'react-native-flash-message';
 import notifee, { AuthorizationStatus } from '@notifee/react-native';
-import messaging, {FirebaseMessagingTypes } from '@react-native-firebase/messaging';
+import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
+import * as Linking from 'expo-linking';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -48,6 +49,8 @@ const onMessageHandler = (remoteMessage: FirebaseMessagingTypes.RemoteMessage) =
   });
 }
 
+const prefix = Linking.createURL('/')
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     'GeneralSans-Extralight': require('./assets/fonts/GeneralSans-Extralight.otf'),
@@ -82,12 +85,27 @@ export default function App() {
   function ThemedApp() {
     const scheme = useColorScheme();
     const theme = useMemo(() => scheme === 'light' ? AppDefaultTheme: AppDarkTheme, [scheme])
-    const {colors, dark} = useTheme()
+    const { colors, dark } = useTheme()
+    
+    const config = {
+      screens: {
+        Home: 'business'
+      }
+    }
+    const linking = {
+      prefixes: [prefix],
+      config
+    }
+    Linking.useURL()
 
     return (
       <PaperProvider theme={theme}>
         <SafeAreaProvider>
-          <NavigationContainer theme={theme} onReady={onLayoutRootView}>
+          <NavigationContainer
+            theme={theme}
+            onReady={onLayoutRootView}
+            linking={linking}
+          >
             <StatusBar
               backgroundColor={colors.background}
               barStyle={dark ? 'light-content' : 'dark-content'}
