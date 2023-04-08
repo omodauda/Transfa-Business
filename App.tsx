@@ -11,7 +11,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ApolloProvider } from '@apollo/client';
 import client, { persistor } from '~graphql/client';
 import FlashMessage from 'react-native-flash-message';
-import notifee, { AuthorizationStatus } from '@notifee/react-native';
+import notifee, { AuthorizationStatus} from '@notifee/react-native';
 import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 import * as Linking from 'expo-linking';
 
@@ -35,6 +35,7 @@ async function requestUserPermission() {
 
 const onMessageHandler = (remoteMessage: FirebaseMessagingTypes.RemoteMessage) => {
   const { notification, data } = remoteMessage;
+  // console.log('foreground.notify', remoteMessage)
   notifee.displayNotification({
     title: `<p style="color: #212121; font-size: 15px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
           Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">${notification?.title}</p>`,
