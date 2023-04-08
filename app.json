@@ -32,6 +32,7 @@
         "projectId": "8bde03c0-c513-4b62-9b53-cb8bf5af8ea7"
       }
     },
-    "plugins": ["@react-native-firebase/app", "@notifee/react-native"]
+    "plugins": ["@react-native-firebase/app", "@notifee/react-native"],
+    "scheme": "transfa-business"
   }
 }
