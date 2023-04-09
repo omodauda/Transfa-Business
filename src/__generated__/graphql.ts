@@ -312,6 +312,7 @@ export type Mutation = {
   createPayment: CreatePaymentResponse;
   forgotPasswordEmail: MessageResponse;
   forgotPasswordPhone: MessageResponse;
+  loginAdmin: AuthResponse;
   loginBusiness: AuthResponse;
   loginCustomerWithEmail: AuthResponse;
   loginCustomerWithPhone: AuthResponse;
@@ -325,6 +326,7 @@ export type Mutation = {
   resetPasswordWithPhone: MessageResponse;
   resetPhoneNumber: MessageResponse;
   saveUserDeviceId: MessageResponse;
+  updateBusinessStatus: MessageResponse;
   updateUserName: MessageResponse;
 };
 
@@ -361,6 +363,11 @@ export type MutationForgotPasswordEmailArgs = {
 
 export type MutationForgotPasswordPhoneArgs = {
   input: PhoneInput;
+};
+
+
+export type MutationLoginAdminArgs = {
+  input: LoginWithEmailInput;
 };
 
 
@@ -424,6 +431,11 @@ export type MutationSaveUserDeviceIdArgs = {
 };
 
 
+export type MutationUpdateBusinessStatusArgs = {
+  input: UpdateBusinessStatusInput;
+};
+
+
 export type MutationUpdateUserNameArgs = {
   input: UpdateUserNameInput;
 };
@@ -433,9 +445,7 @@ export type Notification = {
   body: Scalars['String'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ID'];
-  order: Order;
   title: Scalars['String'];
-  type: OrderStatus;
 };
 
 export type Order = {
@@ -616,6 +626,11 @@ export type State = {
   value: Scalars['String'];
 };
 
+export type UpdateBusinessStatusInput = {
+  businessId: Scalars['ID'];
+  status: BusinessReviewStatus;
+};
+
 export type UpdateUserNameInput = {
   fullName: Scalars['NonEmptyString'];
 };
@@ -637,7 +652,7 @@ export type ForgotPasswordPhoneMutation = { __typename?: 'Mutation', forgotPassw
 export type GetBusinessQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBusinessQuery = { __typename?: 'Query', getBusiness: { __typename?: 'Business', status: BusinessReviewStatus, registrationNo: any, phone: any, email: any, businessName: any, riders?: Array<{ __typename?: 'Rider', id: any, status: RiderStatus, phone: any, fullName: any, bikeRegNo: any, bikeImage: any }> | null } };
+export type GetBusinessQuery = { __typename?: 'Query', getBusiness: { __typename?: 'Business', id: any, status: BusinessReviewStatus, registrationNo: any, phone: any, email: any, businessName: any, riders?: Array<{ __typename?: 'Rider', id: any, status: RiderStatus, phone: any, fullName: any, bikeRegNo: any, bikeImage: any }> | null } };
 
 export type LoginMutationVariables = Exact<{
   input: LoginWithEmailInput;
@@ -677,7 +692,7 @@ export type SaveFcmTokenMutation = { __typename?: 'Mutation', saveUserDeviceId: 
 
 export const ForgotPasswordEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ForgotPasswordEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"forgotPasswordEmail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<ForgotPasswordEmailMutation, ForgotPasswordEmailMutationVariables>;
 export const ForgotPasswordPhoneDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ForgotPasswordPhone"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PhoneInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"forgotPasswordPhone"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<ForgotPasswordPhoneMutation, ForgotPasswordPhoneMutationVariables>;
-export const GetBusinessDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBusiness"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getBusiness"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"registrationNo"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"businessName"}},{"kind":"Field","name":{"kind":"Name","value":"riders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"bikeRegNo"}},{"kind":"Field","name":{"kind":"Name","value":"bikeImage"}}]}}]}}]}}]} as unknown as DocumentNode<GetBusinessQuery, GetBusinessQueryVariables>;
+export const GetBusinessDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetBusiness"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getBusiness"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"registrationNo"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"businessName"}},{"kind":"Field","name":{"kind":"Name","value":"riders"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"fullName"}},{"kind":"Field","name":{"kind":"Name","value":"bikeRegNo"}},{"kind":"Field","name":{"kind":"Name","value":"bikeImage"}}]}}]}}]}}]} as unknown as DocumentNode<GetBusinessQuery, GetBusinessQueryVariables>;
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginWithEmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loginBusiness"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RegisterBusinessInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerBusiness"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
 export const ResetPasswordEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ResetPasswordEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ResetPasswordWithEmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resetPasswordWithEmail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<ResetPasswordEmailMutation, ResetPasswordEmailMutationVariables>;

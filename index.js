@@ -1,10 +1,12 @@
 import {registerRootComponent} from 'expo';
 import messaging from '@react-native-firebase/messaging';
-import notifee from '@notifee/react-native';
+import notifee, {EventType} from '@notifee/react-native';
+import * as Linking from 'expo-linking';
 import App from './App';
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   const {notification, data} = remoteMessage;
+  // console.log('background.notify', remoteMessage);
   notifee.onBackgroundEvent(async () =>
     notifee.displayNotification({
       title: `<p style="color: #212121; font-size: 15px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -19,6 +21,21 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
       data,
     }),
   );
+});
+
+notifee.onBackgroundEvent(async ({type, detail}) => {
+  const {notification} = detail;
+  // console.log('background event', notification);
+  if (type === EventType.PRESS) {
+    if (notification?.data?.link) {
+      const link = notification?.data?.link;
+      const validLink = await Linking.canOpenURL(link);
+      // console.log('isValidLink', validLink);
+      if (validLink) {
+        Linking.openURL(link);
+      }
+    }
+  }
 });
 
 // function HeadlessCheck({isHeadless}) {
