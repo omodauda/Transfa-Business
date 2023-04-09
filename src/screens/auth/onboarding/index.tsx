@@ -23,7 +23,7 @@ function Onboarding ({navigation}: RootStackScreenProps<'Onboarding'>) {
           Send anything fast
         </Text>
         <Text variant='bodyMedium'
-          style={[styles.subTitle, { color: colors.onBackground, textAlign: 'center' }]}
+          style={[styles.subTitle]}
         >
           Door-to-door integrated logistic service solutions for all
           kind of delivery

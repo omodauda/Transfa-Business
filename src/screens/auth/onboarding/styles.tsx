@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   subTitle: {
-    marginBottom: 40
+    marginBottom: 40,
+    color: 'black',
+    textAlign: 'center'
   },
   loginButton: {
     marginTop: 16,
