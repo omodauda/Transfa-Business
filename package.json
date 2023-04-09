@@ -38,7 +38,8 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
     "yup": "^1.0.2",
-    "expo-linking": "~4.0.1"
+    "expo-linking": "~4.0.1",
+    "expo-system-ui": "~2.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
