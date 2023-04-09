@@ -11,6 +11,7 @@ import ForgotPassword from './auth/forgotPassword';
 import Verification from './auth/verification';
 import ResetPassword from './auth/resetPassword';
 import Home from './home';
+import ListBike from './bike/listBike';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -31,6 +32,7 @@ export default function Screens() {
         ) : (
           <Stack.Group>
             <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="ListBike" component={ListBike} />
           </Stack.Group>
         )
       }
