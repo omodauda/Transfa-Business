@@ -44,6 +44,12 @@
             "useFrameworks": "static"
           }
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Transfa Business needs permission to access your photos to let you upload a bike image"
+        }
       ]
     ],
     "scheme": "transfa-business"
