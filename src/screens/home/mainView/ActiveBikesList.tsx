@@ -2,7 +2,7 @@
 import { FlatList, StyleSheet, View, Image } from 'react-native'
 import React from 'react'
 import {Text, useTheme} from 'react-native-paper'
-import { Rider } from '~types'
+import { Rider } from '~__generated__/graphql'
 
 interface Props {
   data: Rider[]
@@ -17,9 +17,9 @@ export default function ActiveBikesList({data}: Props) {
       showsHorizontalScrollIndicator={false}
       renderItem={({ item }) => (
           <View style={styles.bikeView}>    
-            <Image source={item.image} resizeMode="cover" style={styles.image} />
+            <Image source={{uri: item.bikeImage}} resizeMode="cover" style={styles.image} />
           <Text variant="bodySmall" style={[styles.regNo, { color: colors.onSecondary }]}>
-            {item.registrationNo}
+            {item.bikeRegNo}
           </Text>
           </View>
         )
