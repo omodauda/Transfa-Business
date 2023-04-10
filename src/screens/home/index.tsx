@@ -56,16 +56,16 @@ export default function Home() {
     if (
       !loading &&
       data?.status === BusinessReviewStatus.Verified &&
-      !!data.riders
+      data.riders === null
     ) {
       return <ZeroBikeView />
     }
     if (
       !loading &&
       data?.status === BusinessReviewStatus.Verified &&
-      data.riders
+      data.riders && data.riders.length > 0
     ) {
-      return <MainView />
+      return <MainView bikes={data.riders} />
     }
   }
   
