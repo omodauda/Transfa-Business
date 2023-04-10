@@ -1,17 +1,25 @@
-/* eslint-disable global-require */
 import {View} from 'react-native'
 import React from 'react'
 import CustomHeader from '~components/CustomHeader'
 import SettingSvg from '~components/svg/setting'
 import { useTheme, Text } from 'react-native-paper'
-import {BIKES, ORDERS} from '~mocks'
+import {ORDERS} from '~mocks'
 import Button from '~components/Button'
+import { Rider } from '~__generated__/graphql'
+import { useNavigation } from '@react-navigation/native'
+import { RootStackScreenProps } from '~types/navigation'
 import styles from './styles'
 import ActiveBikesList from './ActiveBikesList'
 import RecentFulfiledOrderList from './RecentFulfiledOrderList'
 
-export default function MainView() {
+interface MainViewProps {
+  bikes: Rider[]
+}
+
+export default function MainView({bikes}: MainViewProps) {
   const { colors } = useTheme()
+  const navigation = useNavigation<RootStackScreenProps<'Home'>['navigation']>()
+
   const enableViewAll = ORDERS.length > 3;
 
   const recentOrders = ORDERS.slice(0, 3)
@@ -41,7 +49,7 @@ export default function MainView() {
           >
             ACTIVE BIKES
           </Text>
-          <ActiveBikesList data={BIKES} />
+          <ActiveBikesList data={bikes} />
         </View>
       </View>
 
@@ -57,7 +65,10 @@ export default function MainView() {
           }
         </View>
         <RecentFulfiledOrderList data={recentOrders} />
-        <Button label='Add A New Bike' />
+        <Button
+          label='Add A New Bike'
+          onPress={() => navigation.navigate('ListBike')}
+        />
       </View>
     </View>
   )
