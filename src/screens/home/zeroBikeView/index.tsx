@@ -6,9 +6,12 @@ import SettingSvg from '~components/svg/setting'
 import { useTheme, Text } from 'react-native-paper'
 import ListBikeSvg from '~components/svg/listbike'
 import Button from '~components/Button'
+import {useNavigation} from '@react-navigation/native'
+import { RootStackScreenProps } from '~types/navigation'
 
 export default function ZeroBikeView() {
-  const {colors} = useTheme()
+  const { colors } = useTheme()
+  const navigation = useNavigation<RootStackScreenProps<'Home'>['navigation']>()
   return (
     <View style={styles.screen}>
       <CustomHeader
@@ -46,6 +49,7 @@ export default function ZeroBikeView() {
       </View>
       <Button
         label='Get Started'
+        onPress={() => navigation.navigate('ListBike')}
       />
     </View>
   )
