@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { FlatList, StyleSheet, View, Image } from 'react-native'
+import { FlatList, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import {ActivityIndicator, Text, useTheme} from 'react-native-paper'
 import { Rider } from '~__generated__/graphql'
+import { useNavigation } from '@react-navigation/native'
+import { RootStackScreenProps } from '~types/navigation'
 
 interface Props {
   data: Rider[]
@@ -10,6 +12,7 @@ interface Props {
 export default function ActiveBikesList({data}: Props) {
   const { colors } = useTheme()
   const [loading, setLoading] = useState(false)
+  const navigation = useNavigation<RootStackScreenProps<'Home'>['navigation']>()
 
   function onLoading({ value }: {value: boolean}) {
     setLoading(value)
@@ -27,15 +30,20 @@ export default function ActiveBikesList({data}: Props) {
                   <ActivityIndicator color={colors.primary} />
               </View>
             }
-            <Image
-              source={{ uri: item.bikeImage }}
-              resizeMode="cover" style={styles.image}
-              onLoadStart={() => onLoading({ value: true })}
-              onLoadEnd={() => onLoading({ value: false })}
-            />
-            <Text variant="bodySmall" style={[styles.regNo, { color: colors.onSecondary }]}>
-              {item.bikeRegNo}
-            </Text>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('BikeDetails', {rider: item})}
+          >
+              <Image
+                source={{ uri: item.bikeImage }}
+                resizeMode="cover" style={styles.image}
+                onLoadStart={() => onLoading({ value: true })}
+                onLoadEnd={() => onLoading({ value: false })}
+              />
+              <Text variant="bodySmall" style={[styles.regNo, { color: colors.onSecondary }]}>
+                {item.bikeRegNo}
+              </Text>
+            </TouchableOpacity>
           </View>
         )
       }
