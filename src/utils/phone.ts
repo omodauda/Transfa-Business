@@ -4,4 +4,9 @@ function IntlFormat(_phone: string) {
   return phone.join('');
 };
 
-export default IntlFormat;
+function LocalFormat(_phone: string) {
+  const phone = _phone.split('').slice(4);
+  return `0${phone.join('')}`
+}
+
+export { IntlFormat, LocalFormat };

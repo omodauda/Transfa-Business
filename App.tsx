@@ -5,7 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Provider as PaperProvider, useTheme} from 'react-native-paper';
 import { useFonts } from 'expo-font';
 import { AppDefaultTheme, AppDarkTheme } from '~config/theme';
-import { NavigationContainer } from '@react-navigation/native';
+import { LinkingOptions, NavigationContainer } from '@react-navigation/native';
 import Screens from '~screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ApolloProvider } from '@apollo/client';
@@ -14,6 +14,7 @@ import FlashMessage from 'react-native-flash-message';
 import notifee, { AuthorizationStatus} from '@notifee/react-native';
 import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging';
 import * as Linking from 'expo-linking';
+import { RootStackParamList } from '~types/navigation';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -90,10 +91,10 @@ export default function App() {
     
     const config = {
       screens: {
-        Home: 'business'
+        Home: 'business',
       }
     }
-    const linking = {
+    const linking: LinkingOptions<RootStackParamList> = {
       prefixes: [prefix],
       config
     }

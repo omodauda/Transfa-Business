@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Rider } from "~__generated__/graphql";
 
 export type RootStackParamList = {
   Onboarding: undefined;
@@ -25,6 +26,9 @@ export type RootStackParamList = {
   };
   Home: undefined;
   ListBike: undefined;
+  BikeDetails: {
+    rider: Rider
+  };
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

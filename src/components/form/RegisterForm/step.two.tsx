@@ -6,7 +6,7 @@ import Button from '~components/Button';
 import { RegistrationFormData } from '~types';
 import useRegister from '~hooks/api/useRegister';
 import { RegisterBusinessInput } from '~__generated__/graphql';
-import IntlFormat from '~utils/phone';
+import {IntlFormat} from '~utils/phone';
 
 interface Props {
   formValues: RegistrationFormData;
