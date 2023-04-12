@@ -10,7 +10,7 @@ import BackButtonSvg from '~components/svg/backbutton';
 import { RootStackScreenProps } from '~types/navigation';
 import ForgotPasswordSvg from '~components/svg/forgotpassword';
 import PhoneEmailInput from '~components/PhoneEmailInput';
-import IntlFormat from '~utils/phone';
+import {IntlFormat} from '~utils/phone';
 import useForgotPasswordPhone from '~hooks/api/useForgotPasswordPhone';
 import { showMessage } from 'react-native-flash-message';
 import useForgotPasswordEmail from '~hooks/api/useForgotPasswordEmail';
